@@ -1,0 +1,23 @@
+Enter the Gungeon but with bombs, you periodically have to choose 2 modifiers for your bombs. 3D bomber.
+
+Roguelike, strategy (builds), progression
+
+Bomb modifiers:
+none (9 tile square)
+long fuse
+nuke (kills player instantly if within sight)
+x-pattern
+mini-bombs (low cooldown?)
+metal bomb (blocks enemies or bullets)
+bfb (damages enemies while en route)
+big bomb (16 tile square)
+siphon bomb (deals more damage but siphons player health upon throw, returning health if enemy hit)
+black hole bomb (moves enemies toward it)
+remote bomb (bombs are now remotely activated)
+square bomb
+sticky bombs
+
+Bomb combos
+
+Layout:
+5 combat rooms total, 4 item choosing rooms. Last combat room boss room, last item choosing room has 3 items instead of 2.
