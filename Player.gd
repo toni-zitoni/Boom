@@ -9,6 +9,7 @@ const SENSITIVITY = 0.003
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 
+var Bomb = preload("res://basic_bomb.tscn")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -41,3 +42,9 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func bombThrow():
+	if Input.is_action_just_released("throw"):
+		var bomb_ins = Bomb.instantiate()
+		bomb_ins.position = $Head/BombPos.global_position
+		get_tree().current_scene.add_child(bomb_ins)
