@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://47lo5rs8momx"]
+[gd_scene load_steps=4 format=3 uid="uid://47lo5rs8momx"]
+
+[ext_resource type="Script" path="res://basic_bomb.gd" id="1_f0tob"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jey74"]
+bounce = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_supt3"]
 
-[node name="RigidBody3D" type="RigidBody3D"]
+[node name="Bomb" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_jey74")
+continuous_cd = true
+script = ExtResource("1_f0tob")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 

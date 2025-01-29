@@ -9,18 +9,18 @@ const SENSITIVITY = 0.003
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 
+var canThrowBomb = true
 var Bomb = preload("res://basic_bomb.tscn")
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
-
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -44,7 +44,19 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func bombThrow():
-	if Input.is_action_just_released("throw"):
+	if Input.is_action_just_released("throw") && canThrowBomb:
 		var bomb_ins = Bomb.instantiate()
 		bomb_ins.position = $Head/BombPos.global_position
 		get_tree().current_scene.add_child(bomb_ins)
+		
+		canThrowBomb = false
+		$ThrowTimer.start()
+		
+		var player_rotation = $Head.global_transform.basis.z.normalized()
+		var force = -18
+		var bomb_up_dir = 3.5
+		
+		bomb_ins.apply_central_impulse(player_rotation * force * Vector3(0, bomb_up_dir, 0))
+
+func _on_throw_timer_timeout() -> void:
+	pass # Replace with function body.

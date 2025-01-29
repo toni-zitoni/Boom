@@ -37,7 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.631264, 0)
 script = ExtResource("1_ml1um")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40155, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.635033, 0)
 mesh = SubResource("CapsuleMesh_c6cqa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -52,3 +52,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02905, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02905, 0)
+
+[node name="ThrowTimer" type="Timer" parent="Player"]
+one_shot = true
+
+[connection signal="timeout" from="Player/ThrowTimer" to="Player" method="_on_throw_timer_timeout"]

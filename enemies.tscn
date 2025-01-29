@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://gt4uku1h10lv"]
+
+[ext_resource type="Script" path="res://big_demon.gd" id="1_5kx2q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tvc5l"]
+
+[node name="BigDemon" type="CharacterBody3D"]
+script = ExtResource("1_5kx2q")
+min_speed = null
+max_speed = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_tvc5l")
+
+[node name="Pivot" type="Node3D" parent="."]
