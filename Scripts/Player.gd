@@ -10,7 +10,13 @@ const SENSITIVITY = 0.003
 @onready var camera = $Head/Camera3D
 
 var canThrowBomb = true
-var Bomb = preload("res://basic_bomb.tscn")
+var Bomb = preload("res://Player/basic_bomb.tscn")
+
+#make it so the mouse toggles being captured or not on esc presses
+
+
+
+
 
 
 func _ready():
@@ -23,6 +29,15 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
 func _physics_process(delta: float) -> void:
+	
+	if Input.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if Input.is_action_pressed("throw"):
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

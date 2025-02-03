@@ -1,5 +1,8 @@
 extends Node3D
 
+#make enemies spawn higher up by like 2 change the randomness so the y isnt random
+
+
 @export var enemy_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.

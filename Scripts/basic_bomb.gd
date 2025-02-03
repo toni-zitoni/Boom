@@ -1,6 +1,12 @@
 extends RigidBody3D
 
+#@export var  bombSize =  0
 var damage = 50
+#@onready var bombRadius: CollisionShape3D = $Radius/CollisionShape3D
+
+#get some sort of visual indicator for size of explosion radius
+
+
 
 # Called when body collides with something.
 func _on_body_entered(body):
@@ -9,8 +15,8 @@ func _on_body_entered(body):
 	
 	
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+#func _ready() -> void:
+	#bombRadius.transform.scaled_local(Vector3(bombSize,bombSize,bombSize))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,5 +1,10 @@
 extends CharacterBody3D
 
+
+
+#add gravity
+
+
 # Minimum speed of the Big Demon in meters per second.
 @export var min_speed = 10
 # Maximum speed of the Big Demon in meters per second.
