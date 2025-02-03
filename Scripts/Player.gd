@@ -70,10 +70,10 @@ func bombThrow():
 	$ThrowTimer.start()
 	
 	var player_rotation = $Head.global_transform.basis.z.normalized()
-	var force = -180
-	var bomb_up_dir = 70
+	var force = -7
+	var bomb_up_dir = 3.5
 	
-	bomb_ins.apply_central_impulse(player_rotation * force * Vector3(0, bomb_up_dir, 0))
+	bomb_ins.apply_central_impulse(player_rotation * force + Vector3(0, bomb_up_dir, 0))
 
 func _on_throw_timer_timeout() -> void:
 	canThrowBomb = true
