@@ -26,7 +26,10 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
+	if Input.is_action_just_released("throw") && canThrowBomb:
+		bombThrow()
+	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -44,19 +47,18 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func bombThrow():
-	if Input.is_action_just_released("throw") && canThrowBomb:
-		var bomb_ins = Bomb.instantiate()
-		bomb_ins.position = $Head/BombPos.global_position
-		get_tree().current_scene.add_child(bomb_ins)
-		
-		canThrowBomb = false
-		$ThrowTimer.start()
-		
-		var player_rotation = $Head.global_transform.basis.z.normalized()
-		var force = -18
-		var bomb_up_dir = 3.5
-		
-		bomb_ins.apply_central_impulse(player_rotation * force * Vector3(0, bomb_up_dir, 0))
+	var bomb_ins = Bomb.instantiate()
+	bomb_ins.position = $Head/Camera3D/BombReleasePoint/BombPos.global_position
+	get_tree().current_scene.add_child(bomb_ins)
+	
+	canThrowBomb = false
+	$ThrowTimer.start()
+	
+	var player_rotation = $Head.global_transform.basis.z.normalized()
+	var force = -180
+	var bomb_up_dir = 70
+	
+	bomb_ins.apply_central_impulse(player_rotation * force * Vector3(0, bomb_up_dir, 0))
 
 func _on_throw_timer_timeout() -> void:
-	pass # Replace with function body.
+	canThrowBomb = true
