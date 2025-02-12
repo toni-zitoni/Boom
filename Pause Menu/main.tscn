@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://drwu8lvcnu6q8"]
+
+[ext_resource type="Script" path="res://Pause Menu/Pause_On_Main.gd" id="1_tesw0"]
+[ext_resource type="Texture2D" uid="uid://bs71ovormbktb" path="res://icon.svg" id="2_t5kc6"]
+[ext_resource type="PackedScene" uid="uid://dkgo0kdh2rdrf" path="res://Pause Menu/pause_menu.tscn" id="2_vmugq"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_tesw0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(624, 306)
+texture = ExtResource("2_t5kc6")
+
+[node name="Pause Menu" parent="." instance=ExtResource("2_vmugq")]
+visible = false

@@ -1,10 +1,6 @@
 extends CharacterBody3D
 
 
-
-#add gravity
-
-
 # Minimum speed of the Big Demon in meters per second.
 @export var min_speed = 10
 # Maximum speed of the Big Demon in meters per second.
@@ -12,12 +8,17 @@ extends CharacterBody3D
 
 var health = 25
 
+
 func enemy_hit(damage):
 	health -= damage
 	if health <= 0:
 		queue_free()
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * _delta
+		
 	move_and_slide()
 
 func initialize(start_position, player_position):

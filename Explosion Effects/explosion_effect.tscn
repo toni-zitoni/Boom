@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://duo524tlwnt7p"]
+
+[node name="Explosion Effect" type="Node3D"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CSGSphere3D"]

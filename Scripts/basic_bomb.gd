@@ -6,7 +6,7 @@ var damage = 50
 
 #get some sort of visual indicator for size of explosion radius
 
-
+var Explosion = preload("res://Explosion Effects/explosion_effect.tscn")
 
 # Called when body collides with something.
 func _on_body_entered(body):
@@ -25,7 +25,12 @@ func _process(delta: float) -> void:
 
 
 func _on_fuse_timer_timeout() -> void:
+	var explosion_ins = Explosion.instantiate()
+	explosion_ins.position = $Radius/CollisionShape3D.global_position
+	get_tree().current_scene.add_child(explosion_ins)
+	
 	var bodies = $Radius.get_overlapping_bodies()
+	
 	for obj in bodies:
 		if obj.is_in_group("enemy"):
 			var ray_params = PhysicsRayQueryParameters3D.create(global_transform.origin, obj.global_transform.origin)
