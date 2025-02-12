@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://2wcig26222tu"]
+[gd_scene load_steps=14 format=3 uid="uid://2wcig26222tu"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ml1um"]
 [ext_resource type="Script" path="res://Scripts/spawn.gd" id="1_si31i"]
 [ext_resource type="PackedScene" uid="uid://gt4uku1h10lv" path="res://Enemies/enemies.tscn" id="2_kl8ir"]
+[ext_resource type="PackedScene" uid="uid://dkgo0kdh2rdrf" path="res://Pause Menu/pause_menu.tscn" id="4_jf14y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j34c8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -113,6 +114,9 @@ autostart = true
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_cscpe")
+
+[node name="Pause Menu" parent="." instance=ExtResource("4_jf14y")]
+visible = false
 
 [connection signal="timeout" from="Player/ThrowTimer" to="Player" method="_on_throw_timer_timeout"]
 [connection signal="timeout" from="InitialMobTimer" to="." method="_on_initial_mob_timer_timeout"]

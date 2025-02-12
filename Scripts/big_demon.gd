@@ -14,12 +14,14 @@ func enemy_hit(damage):
 	if health <= 0:
 		queue_free()
 
+
 func _physics_process(_delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * _delta
 		
 	move_and_slide()
+
 
 func initialize(start_position, player_position):
 	look_at_from_position(start_position, player_position, Vector3.UP)

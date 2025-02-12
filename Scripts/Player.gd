@@ -5,6 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.003
 
+@onready var world: Node3D = $".."
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
@@ -13,10 +14,11 @@ const SENSITIVITY = 0.003
 var canThrowBomb = true
 var Bomb = preload("res://Player/basic_bomb.tscn")
 
-#make it so the mouse toggles being captured or not on esc presses
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -24,11 +26,12 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
+
 func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if Input.is_action_pressed("throw"):
+	if Input.is_action_pressed("throw") && world.paused == false:
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
@@ -36,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_released("throw") && canThrowBomb:
+	if Input.is_action_just_released("throw") && canThrowBomb && world.paused == false:
 		bombThrow()
 	
 	# Handle jump.
@@ -55,6 +58,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
 func bombThrow():
 	var bomb_ins = Bomb.instantiate()
 	bomb_ins.position = $Head/Camera3D/BombReleasePoint/BombPos.global_position
@@ -68,6 +72,7 @@ func bombThrow():
 	var bomb_up_dir = 3.5
 	
 	bomb_ins.apply_central_impulse(player_rotation * force + Vector3(0, bomb_up_dir, 0))
+
 
 func _on_throw_timer_timeout() -> void:
 	canThrowBomb = true

@@ -1,8 +1,14 @@
-[gd_scene format=3 uid="uid://duo524tlwnt7p"]
+[gd_scene load_steps=2 format=3 uid="uid://duo524tlwnt7p"]
+
+[ext_resource type="Script" path="res://Explosion Effects/explosion_effect.gd" id="1_m3302"]
 
 [node name="Explosion Effect" type="Node3D"]
+script = ExtResource("1_m3302")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CSGSphere3D"]
+[node name="ExplosionTimer" type="Timer" parent="CSGSphere3D"]
+autostart = true
+
+[connection signal="timeout" from="CSGSphere3D/ExplosionTimer" to="." method="_on_explosion_timer_timeout"]
